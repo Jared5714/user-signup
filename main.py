@@ -41,7 +41,7 @@ def validate_signup():
     elif verifypword != password:
         verifypass_error = "Passwords do not match"
         
-    if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
+    if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email) or not email:
         email_error = "Email must contain @ . and 3-20 characters"
 
     if not pass_error and not user_error and not verifypass_error:
