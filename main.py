@@ -27,9 +27,7 @@ def validate_signup():
     verifypass_error = ""
     email_error = ""    
     
-    if not username.isalpha():
-        user_error = "Please enter User Name"
-    elif not re.match("^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$", username):
+    if not re.match("^[A-Za-z0-9_-]*$", username):
         user_error = "Must be between 3 and 25 characters"
 
     if not password.isalpha():
@@ -41,8 +39,12 @@ def validate_signup():
     elif verifypword != password:
         verifypass_error = "Passwords do not match"
         
-    if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email) or not email:
+    if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
         email_error = "Email must contain @ . and 3-20 characters"
+    elif not email:
+        email_error = "Please enter an email"
+    elif email:
+        email = request.form['email']
 
     if not pass_error and not user_error and not verifypass_error:
         template = jinja_env.get_template('welcome.html')
